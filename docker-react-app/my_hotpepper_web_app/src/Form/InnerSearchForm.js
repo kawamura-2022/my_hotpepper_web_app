@@ -2,7 +2,7 @@ import React from "react";
 
 const range = (i, j) => [...Array(j).keys()].slice(i, j);
 const InnerSearchForm =  ({ values, range_candidates, handleChange, handleSubmit }) => (
-  <form onSubmit={handleSubmit}>
+  <form onSubmit={handleSubmit}> 
     <div style={{ display: "flex", justifyContent: "center" }}>
       {range_candidates.map(c => (
         <div key={`${c.value}`}>
