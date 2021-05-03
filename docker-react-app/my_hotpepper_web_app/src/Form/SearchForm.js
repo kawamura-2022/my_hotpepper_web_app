@@ -6,10 +6,6 @@ import SearchCondition from "./SearchCondition";
 import { geoPropTypes } from "react-geolocated";
 
 import HotpepperApi from "../API/Hotpepper";
-// import {call} from 'redux-saga/effects';
-
-import axios from 'axios';
-axios.defaults.headers.common['content-type'] = 'application/json';
 
 const SearchForm = () => (
     <Formik      
@@ -32,18 +28,6 @@ const SearchForm = () => (
 
         // console.log(latm, lng)
         // alert(JSON.stringify(params)); // Debug
-
-        // local の docker で建てた API からgetする例
-        // axios.get("/run_agent", params)
-        // .then(response => console.log(response))
-        // .catch(error => console.log(error))
-        // console.log('test api on github get end...')
-
-        // axios({
-        //   method : 'GET',
-        //   url    : '/hotpepper/gourmet/v1/',
-        //   params : params
-        // }).then(response => console.log(typeof response.data,"axios -> ",response.data));
 
         const response = HotpepperApi.getNearRestaurant(params);        
         response.then((res) => 
