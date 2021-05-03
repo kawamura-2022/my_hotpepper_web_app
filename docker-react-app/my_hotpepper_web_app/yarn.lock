@@ -9469,6 +9469,16 @@
     "indent-string" "^4.0.0"
     "strip-indent" "^3.0.0"
 
+"redux-saga-effects@^1.1.0":
+  "integrity" "sha1-+6YQ6Yjri+96blgAjZ7FSUOHCl8="
+  "resolved" "https://registry.npmjs.org/redux-saga-effects/-/redux-saga-effects-1.1.0.tgz"
+  "version" "1.1.0"
+
+"redux-saga@>=0.8.0 <0.15.0":
+  "integrity" "sha1-rQGvq+AuxBoX31Ti4JqiNrMKdzI="
+  "resolved" "https://registry.npmjs.org/redux-saga/-/redux-saga-0.14.8.tgz"
+  "version" "0.14.8"
+
 "regenerate-unicode-properties@^8.2.0":
   "integrity" "sha512-F9DjY1vKLo/tPePDycuH3dn9H1OTPIkVD9Kz4LODu+F2C75mgjAJ7x/gwy6ZcSNRAAkhNlJSOHRe8k3p+K9WhA=="
   "resolved" "https://registry.npmjs.org/regenerate-unicode-properties/-/regenerate-unicode-properties-8.2.0.tgz"

@@ -1,14 +1,7 @@
 const proxy = require('http-proxy-middleware');
  
 module.exports = function(app) {
-    const api_url = process.env.REACT_APP_API_URL_HOTPEPPER
-    app.use(proxy("/api/call_hotpepper", { target: api_url,changeOrigin: true,secure: false}));  
-};
+    app.use(proxy("/hotpepper/gourmet/v1/", { target: "http://webservice.recruit.co.jp", changeOrigin: true, secure: false}));  
 
-// module.exports = function(app) {
-//     const headers  = {
-//         "Content-Type": "application/json",
-//     }
-//     const api_url = process.env.REACT_APP_API_URL_HOTPEPPER
-//     app.use(proxy("/api/call_hotpepper", { target: api_url,changeOrigin: true,secure: false,headers: headers}));  
-// };
+    app.use(proxy("/run_agent", { target: "http://host.docker.internal:5051", changeOrigin: true, secure: false}));  // APIにリクストが来ているか確認する用    
+};

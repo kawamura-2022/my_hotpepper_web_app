@@ -6,7 +6,10 @@ import SearchCondition from "./SearchCondition";
 import { geoPropTypes } from "react-geolocated";
 
 import HotpepperApi from "../API/Hotpepper";
+// import {call} from 'redux-saga/effects';
 
+import axios from 'axios';
+axios.defaults.headers.common['content-type'] = 'application/json';
 
 const SearchForm = () => (
     <Formik      
@@ -21,23 +24,32 @@ const SearchForm = () => (
         console.log(geoPropTypes.coords.longitude)
 
 
-        values["latm"] = "34";
-        values["lng"] = "67";
-
-        console.log(values)
-                
+        values["latm"] = "34.67";
+        values["lng"] = "135.52";        
+        console.log("values -> ",values)
+          
         const params = SearchCondition.fromForm(values).toAPI();
 
         // console.log(latm, lng)
-        alert(JSON.stringify(params)); // Debug
-                
-        const my_response = HotpepperApi.getNearRestaurant(params);        
+        // alert(JSON.stringify(params)); // Debug
 
-        console.log(my_response)
-        console.log('my_response status -> '+my_response.status)
-        console.log('call api end!!')
-        // alert(process.env.REACT_APP_API_URL_HOTPEPPER);
-        // alert(process.env.REACT_APP_API_KEY_HOTPEPPER);
+        // local の docker で建てた API からgetする例
+        // axios.get("/run_agent", params)
+        // .then(response => console.log(response))
+        // .catch(error => console.log(error))
+        // console.log('test api on github get end...')
+
+        // axios({
+        //   method : 'GET',
+        //   url    : '/hotpepper/gourmet/v1/',
+        //   params : params
+        // }).then(response => console.log(typeof response.data,"axios -> ",response.data));
+
+        const response = HotpepperApi.getNearRestaurant(params);        
+        response.then((res) => 
+          console.log('respose data -> ',res.data)          
+        );
+
       }}
       render={({ values, handleSubmit, handleChange }) => (
         <InnerForm
@@ -45,7 +57,7 @@ const SearchForm = () => (
           range_candidates = {SearchCondition.get_rangeCandidates()}
           handleSubmit={handleSubmit}
           handleChange={handleChange}
-        />        
+        />                
       )}
     />
   );

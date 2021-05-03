@@ -9,18 +9,12 @@ export default class ApiClient {
     this._domain = ``;    
   }
 
-  request(method, endpoint, params = null, headers = null) {
-    const url = this._domain;
-    // const url = this._domain + endpoint;
-    // axios.defaults.headers['X-Requested-With'] = 'XMLHttpRequest';
-
-    headers = Object.assign({}, headers);
+  request(method, endpoint, params = null, headers = null) {    
+    const url = this._domain + endpoint;    
 
     let options = {
       url,
-      method,
-      headers,
-      responseType: 'json',
+      method,    
     };
 
     if (method === 'GET') {
