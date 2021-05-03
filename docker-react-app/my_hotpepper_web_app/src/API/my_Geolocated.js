@@ -2,11 +2,16 @@ import React from "react";
 import { geolocated  } from "react-geolocated";
 // import { geoPropTypes  } from "react-geolocated";
 
-class MyGeolocated extends React.Component {
+class MyGeolocated extends React.Component {        
+    retCords () {
+        return this.props.coords;
+    }
+
     render() {
+        console.log('start MyGeolocated render')
         return !this.props.isGeolocationAvailable ? (
             <div>ブラウザが Geolocation に対応していません</div>
-        ) : !this.props.isGeolocationEnabled ? (            
+        ) : !this.props.isGeolocationEnabled ? (                        
             <div>Geolocation が利用できません</div>
         ) : this.props.coords ? (            
             <div> 現在地を取得しました</div>            

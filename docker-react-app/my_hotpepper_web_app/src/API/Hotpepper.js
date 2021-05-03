@@ -4,11 +4,8 @@ const client = new ApiClient();
 
 class HotpepperApi {
 
-    static async getNearRestaurant(params) {
-      // const endpoint = '/api/call_hotpepper';
+    static async getNearRestaurant(params) {      
       const endpoint = '/hotpepper/gourmet/v1/';
-    
-      // const endpoint = process.env.REACT_APP_API_URL_HOTPEPPER;
 
       try {        
         return await client.request('GET', endpoint, params);
