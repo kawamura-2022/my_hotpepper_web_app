@@ -9,8 +9,8 @@ const InnerSearchForm =  ({ values, range_candidates, handleChange, handleSubmit
           <input
             type="radio"
             id={c.value}
-            name="tgt_range"
-            defaultChecked={values.tgt_range === c.value}
+            name="range"
+            defaultChecked={values.range === c.value}
             value={c.value}
             onChange={handleChange}
           />
@@ -25,6 +25,17 @@ const InnerSearchForm =  ({ values, range_candidates, handleChange, handleSubmit
         {range(1, 21).map(t => (
           <option key={`${t}`} value={`${t}`}>
             {t}人以上
+          </option>
+        ))}
+      </select>
+    </div>
+    <div>
+      <label>取得件数</label>
+      <select value={values.count} name="count" onChange={handleChange}>
+        {/* <option value="0">指定なし</option> */}
+        {range(10, 100).map(t => (
+          <option key={`${t}`} value={`${t}`}>
+            {t}件以内
           </option>
         ))}
       </select>
