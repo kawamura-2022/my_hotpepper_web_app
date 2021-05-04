@@ -16,9 +16,9 @@ const customStyles = {
 
 // 詳細画面に表示したい情報のkey値
 const showList = ['name', 'address', 'open', 'close', 'thumbnail'];
-const showList_text = ['店舗名', '住所', '営業時間', '定休日', '店舗画像'];
+const showList_text = ['店舗名　', '住所　　', '営業時間', '定休日　', '店舗画像'];
 
-const Sample = ( props ) => {
+const MyModal = ( props ) => {
     console.log('start Modal render')    
     console.log('input props.modalIsOpen -> ' + props.modalIsOpen)
 
@@ -97,5 +97,4 @@ const Sample = ( props ) => {
       </div>
     );
 }
-
-export default Sample;
+export default MyModal;

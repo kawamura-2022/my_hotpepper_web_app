@@ -8,6 +8,7 @@ class StoreDetail extends React.Component {
         super(props)
         this.state = {
             isModal : false,                        
+            isSameModal: false,
             columns: [
                 { title: '店舗名称', field: 'name' },
                 { title: 'アクセス', field: 'access' },                
@@ -99,9 +100,9 @@ class StoreDetail extends React.Component {
                 tooltip: 'Shoe Store Detail',
                 onClick: (event, rowData) => {
                     // alert("rowData -> " + JSON.stringify(rowData))
-                    this.toggleModal();                    
+                    this.toggleModal();
                     console.log('toggleModal -> ' + this.state.isModal)
-                    this.setDetailData(rowData);
+                    this.setDetailData(rowData);                    
                 }
               }
             ]}
@@ -114,11 +115,10 @@ class StoreDetail extends React.Component {
         return (
             this.state.isModal ? (
                 <MyModal modalIsOpen={this.state.isModal} rowData={this.state.detailRowData} />
-            ) : (
-                <div>
-                    not show model                    
-                </div>
-            )               
+            ) :
+            (
+                console.log('this.state.isModal -> ' + this.state.isModal)
+            )
         )
     }
 
@@ -131,7 +131,7 @@ class StoreDetail extends React.Component {
             <div>               
                 <br></br>
                 {this.SimpleActionTable(this.state.columns, this.props.children)}                                
-                {this.ShowModal()}                
+                {this.ShowModal()}                                
             </div>                  
         )
     }

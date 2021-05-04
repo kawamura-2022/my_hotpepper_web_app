@@ -1,12 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-// import App from './App';
+
 import App from './HotpepperApp';
+import StaticExplain from './Explain/StaticExplain';
 import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
   <React.StrictMode>
+    <StaticExplain />
     <App />
   </React.StrictMode>,
   document.getElementById('root')
