@@ -33,7 +33,7 @@ class HotpepperApp extends React.Component {
         let result = xml.getElementsByTagName('results');
         result = result['0'];
         const children = result['children'];
-        console.log("children -> " + children)
+        console.log("children -> " + JSON.stringify(children))
 
         this.setState({
             children: children

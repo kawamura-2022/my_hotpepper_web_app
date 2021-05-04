@@ -1,22 +1,41 @@
 import React from "react";
-import MaterialTable from 'material-table'
+import MaterialTable from 'material-table';
+
+import MyModal from './Modal/MyModal';
 
 class StoreDetail extends React.Component {
     constructor(props){
         super(props)
         this.state = {
-            isModal : false,            
+            isModal : false,                        
             columns: [
                 { title: '店舗名称', field: 'name' },
-                { title: 'アクセス', field: 'access' },
-                { title: 'images', field: 'thumbnail' },  
+                { title: 'アクセス', field: 'access' },                
+                {
+                    title: 'Shop Photo'
+                    ,field: 'thumbnail'
+                    ,render: rowData => (
+                        <img                            
+                            // style={{ height: 36, width: '50%' }}  // TODO: originalのサイズが見やすい??比較
+                            src={rowData.thumbnail}
+                            alt='no thumbnail'
+                        />                        
+                    ),
+                },
               ],
+            detailRowData: [],
         }
     }
     
     toggleModal () {
         this.setState({
-            isModal: !this.state.isModal
+            isModal: !this.state.isModal,            
+        });
+    }
+
+    setDetailData ( rowData ) {
+        this.setState({
+            detailRowData: rowData
         });
     }
 
@@ -35,14 +54,25 @@ class StoreDetail extends React.Component {
                         my_obj_data['name'] = elm.value;
                     } else if (elm.name === 'access') {
                         my_obj_data['access'] = elm.value;
-                    } else if (elm.name === 'photo') {
-                        console.log(elm.photo)
-                        // childre の要素の48番目
-                        // my_obj_data['thumbnail'] = elm.photo.children.pc.children.s;
-                        my_obj_data['thumbnail'] = 'dummy';
-                    } else if (elm.name === 'lat') {
-                        my_obj_data['test'] = 'dummy';
-                    }
+                    } else if (elm.name === 'photo') {                        
+                        // childre の要素の48番目 
+                        // let tgt_img_url = elm.children[0].children[0].value;  // pc の l
+                        let tgt_img_url = elm.children[0].children[1].value;  // pc の m
+                        // let tgt_img_url = elm.children[0].children[2].value;  // pc の s
+                        // let tgt_img_url = elm.children[1].children[0].value;  // mobile の l
+                        // let tgt_img_url = elm.children[1].children[0].value;  // mobile の s
+
+                        my_obj_data['thumbnail'] = tgt_img_url;
+                        
+                        console.log(elm.children[0].children[1].value);                        
+                        // my_obj_data['thumbnail'] = 'https://zartnerds.files.wordpress.com/2015/10/thumbnail.png';
+                    } else if (elm.name === 'address') {
+                        my_obj_data['address'] = elm.value;
+                    } else if (elm.name === 'open') {
+                        my_obj_data['open'] = elm.value;
+                    }　else if (elm.name === 'close') {
+                        my_obj_data['close'] = elm.value;
+                    }                  
                 })                
                 extracted_data.push(my_obj_data)
             }
@@ -54,21 +84,9 @@ class StoreDetail extends React.Component {
         return extracted_data;
     }
 
-    showDetailModal (  ) {
-        console.log("showDetailModal")
-        return (
-            <div id="overlay">
-              <div id="content">
-                <p>これがモーダルウィンドウです。</p>
-                <p><button>close</button></p>
-              </div>
-            </div>
-        )
-    }
-
     SimpleActionTable ( colimns, children ) {
         console.log("called SimpleActionTable")        
-        const extracted_data = this.convChild2Data(children);                
+        const extracted_data = this.convChild2Data(children);
         
         return (
           <MaterialTable
@@ -80,19 +98,40 @@ class StoreDetail extends React.Component {
                 icon: 'library_add',
                 tooltip: 'Shoe Store Detail',
                 onClick: (event, rowData) => {
-                    alert("rowData -> " + JSON.stringify(rowData))
+                    // alert("rowData -> " + JSON.stringify(rowData))
+                    this.toggleModal();                    
+                    console.log('toggleModal -> ' + this.state.isModal)
+                    this.setDetailData(rowData);
                 }
               }
             ]}
           />
         )
       }
+
+    ShowModal () {
+        console.log(this.state.isModal)
+        return (
+            this.state.isModal ? (
+                <MyModal modalIsOpen={this.state.isModal} rowData={this.state.detailRowData} />
+            ) : (
+                <div>
+                    not show model                    
+                </div>
+            )               
+        )
+    }
+
+    closeModal(){
+        this.toggleModal();
+    }
     
     render () {        
         return (
-            <div>                   
+            <div>               
                 <br></br>
-                {this.SimpleActionTable(this.state.columns, this.props.children)}
+                {this.SimpleActionTable(this.state.columns, this.props.children)}                                
+                {this.ShowModal()}                
             </div>                  
         )
     }
