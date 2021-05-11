@@ -1,12 +1,13 @@
 version: '3'
 services:
-   my_hotpepper_web_app:
+   my_hotpepper_web_app_1:
      build: .
      volumes:
-      - ./:/usr/src/app
-     command: sh -c "cd my_hotpepper_web_app && yarn start"
+      - ./my_hotpepper_web_app:/usr/src/app
+      - /usr/src/app/node_modules      ## バインドマウント
+     command: sh -c "yarn start"
      ports:
-      - "3000:3000"
+      - "3000:3000"     
 
 # 参考：https://blog.web.nifty.com/engineer/2714
 # React で，create-react-app　していない場合
